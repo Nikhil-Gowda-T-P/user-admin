@@ -3,12 +3,14 @@ const jwt = require("jsonwebtoken");
 const auth = async (req, res, next) => {
   try {
     const authHeader = req.header("Authorization");
-
+    console.log("in auth")
     if (!authHeader) {
+        console.log(authHeader)
       return res.status(401).send("Please provide an Authorization header...");
     } 
     const decoded = jwt.verify(authHeader, process.env.SECRET_KEY);
-    if(decoded.role=="Admin"){
+    console.log(decoded.role)
+    if(decoded.role=="admin"){
         next();
     }
     else{

@@ -17,7 +17,16 @@ const finduser = async(email) =>{
         }
 }
 
+const updatePassword= async(id,password) =>{
+    try{
+    return await userModel.findByIdAndUpdate(id, {password:password},{ new: true });
+    }catch(error){
+        throw error;
+    }
+
+}
 module.exports ={
     register,
-    finduser
+    finduser,
+    updatePassword
 }

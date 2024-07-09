@@ -5,6 +5,8 @@ const cors = require('cors');
 const helmet=require('helmet')
 const userRouter=require("./routers/user.router")
 const app = express();
+const path = require('path');
+
 app.use(cors({
   origin: '*'
 }));
@@ -12,9 +14,12 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '../public')));
 app.use(helmet());
 app.use(cors()); 
 app.use("/api",userRouter)
+app.use(express.static(path.join(__dirname, '../public')));
+require("./swagger/swagger")(app);
 
 require("dotenv").config({ path: "./config/dev.env" });
 require("./db/mongoose");

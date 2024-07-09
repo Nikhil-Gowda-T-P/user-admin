@@ -55,6 +55,80 @@ const editUser = async(req,res)=>{
 
 }
 
+/**
+ * @swagger
+ * tags:
+ *   name: Admin Services
+ *   description: User management APIs
+ *
+ * /view-users:
+ *   get:
+ *     summary: Get All Users
+ *     description: Use this API to fetch all users
+ *     tags:
+ *       - Admin Services
+ *     parameters:
+ *       - in: header
+ *         name: Authorization
+ *         description: Access token for Authentication.
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Users fetched successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 httpStatusCode:
+ *                   type: integer
+ *                   example: 200
+ *                 customStatusCode:
+ *                   type: integer
+ *                   nullable: true
+ *                 result:
+ *                   type: object
+ *                   properties:
+ *                     successCode:
+ *                       type: integer
+ *                       example: 200
+ *                     result:
+ *                       type: array
+ *                       items:
+ *                         type: object
+ *                         properties:
+ *                           _id:
+ *                             type: string
+ *                             example: 60d21b4667d0d8992e610c85
+ *                           name:
+ *                             type: string
+ *                             example: John Doe
+ *                           email:
+ *                             type: string
+ *                             example: johndoe@example.com
+ *                           role:
+ *                             type: string
+ *                             example: user
+ *                   nullable: true
+ *                 message:
+ *                   type: string
+ *                   example: Users fetched successfully
+ *                 displayMessage:
+ *                   type: string
+ *                   example: Users fetched successfully
+ *                 status:
+ *                   type: boolean
+ *                   example: true
+ *       401:
+ *         description: Unauthorized
+ *         
+ *       500:
+ *         description: Internal server error
+ *         
+ */
+
 
 
 module.exports={
