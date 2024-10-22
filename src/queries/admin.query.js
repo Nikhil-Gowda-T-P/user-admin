@@ -8,17 +8,18 @@ const getAllUsers = async()=>{
     catch(err){
         throw err;
         }
-
 }
 
-const editUser = async(id, body)=>{
+const deleteUser = async(id)=>{
     try {
-        return await userModel.findByIdAndUpdate(id, body, { new: true });
+        const user=await userModel.findByIdAndDelete(id);
+        return user;
     } catch (error) {
         throw error;
     }
 }
 module.exports={
     getAllUsers,
-    editUser
+    deleteUser
 }
+

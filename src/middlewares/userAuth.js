@@ -1,17 +1,16 @@
 const jwt = require("jsonwebtoken");
 
-const auth = async (req, res, next) => {
+const userAuth = async (req, res, next) => {
   try {
-    
     const authHeader = req.header("Authorization");
-    console.log(authHeader)
     if (!authHeader) {
-        
+        console.log(authHeader)
       return res.status(401).send("Please provide an Authorization header...");
     } 
     const decoded = jwt.verify(authHeader, process.env.SECRET_KEY);
-    console.log(decoded.role)
-    if(decoded.role=="admin"){
+    console.log(decoded)
+    if(decoded.role=="admin" ||  decoded.role=="user"){
+        req.email=decoded.email
         next();
     }
     else{
@@ -22,6 +21,6 @@ const auth = async (req, res, next) => {
     res.status(401).send({ error: "Authentication failed" });
   }
 };
-module.exports = auth;
+module.exports = userAuth;
 
 
